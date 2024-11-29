@@ -6,9 +6,12 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-public interface SequenceControllerAPI {
+import javax.validation.constraints.PositiveOrZero;
+import java.math.BigInteger;
+
+public interface
+SequenceControllerAPI {
 
     @Operation(summary = "Calculates sequence value for given index.")
     @APIResponses(value = {
@@ -17,9 +20,10 @@ public interface SequenceControllerAPI {
             @APIResponse(responseCode = "500", description = "Internal Server Error")
     })
     @GetMapping(path = "/{index}")
-    Integer calculateSequence(
+    BigInteger calculateSequence(
             @Parameter(description = "Path variable for index of the sequence")
-            @PathVariable(name = "index") int index);
+            @PathVariable(name = "index")
+            @PositiveOrZero(message = "Index can't be negative") BigInteger index);
 
 
 }

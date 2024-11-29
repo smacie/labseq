@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigInteger;
+
 @RestController
 @RequestMapping("/v1")
 public class SequenceController implements SequenceControllerAPI {
@@ -17,7 +19,7 @@ public class SequenceController implements SequenceControllerAPI {
 
     @Override
     @ResponseStatus(HttpStatus.OK)
-    public Integer calculateSequence(int index) {
+    public BigInteger calculateSequence(BigInteger index) {
         return sequenceService.calculateSequence(index);
     }
 }
